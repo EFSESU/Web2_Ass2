@@ -21,4 +21,4 @@ server.use('/api', serverApi);
 //让服务器监听3000的端口   listen 3000
 server.listen(3000);
 //输出信息
-console.log('listening, port：3000'); 
+console.log('listening, port: 3000'); 
