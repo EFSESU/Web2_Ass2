@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CrowdFunding</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <aside>
+        <div class="sys-name">Menu</div>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./fundraiser.html">Fundraiser</a></li>
+            </ul>
+        </nav>
+    </aside>
+<main>
+    <div>
+        <div> caption:  <span id="caption"></span></div>
+        <div> organizer:  <span id="organizer"></span></div>
+        <div> category name:  <span id="category-name"></span></div>
+        <div> target funding:  <span id="target-funding"></span></div>
+        <div> current funding:  <span id="current-funding"></span></div>
+        <div> city:  <span id="city"></span></div>
+        <button onclick="alert('This feature is under construction');">donation</button>
+    </div>
+</main>
+</body>
+<script src="js/request.js"></script>
+<script>
+    GetRequest('detail', {
+        fundraiser_id: +location.href.split('=')[1]
+    }).then(res => {
+        // render data
+        const caption = document.getElementById('caption');
+        caption.innerText = res.caption;
+        const organizer = document.getElementById('organizer');
+        organizer.innerText = res.organizer;
+        const categoryName = document.getElementById('category-name');
+        categoryName.innerText = res.categoryName;
+        const targetFunding = document.getElementById('target-funding');
+        targetFunding.innerText = res.target_funding;
+        const currentFunding = document.getElementById('current-funding');
+        currentFunding.innerText = res.current_funding;
+        const city = document.getElementById('city');
+        city.innerText = res.city;
+    });
+</script>
+</html>
