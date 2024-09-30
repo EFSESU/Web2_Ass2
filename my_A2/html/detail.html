@@ -26,12 +26,12 @@
         <div> target funding:  <span id="target-funding"></span></div>
         <div> current funding:  <span id="current-funding"></span></div>
         <div> city:  <span id="city"></span></div>
-        <button onclick="alert('This feature is under construction');">donation</button>
     </div>
 </main>
 </body>
 <script src="js/request.js"></script>
 <script>
+    //调用GetRequest,获取活动详细信息
     GetRequest('detail', {
         fundraiser_id: +location.href.split('=')[1]
     }).then(res => {
