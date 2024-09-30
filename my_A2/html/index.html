@@ -5,8 +5,13 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Funding Ciallo~(∠・ω< )⌒★</title>
+    <title>Document</title>
     <link rel="stylesheet" href="./css/index.css">
+    <style>
+        .search-controls {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
@@ -28,8 +33,137 @@
 
 
         <p>This is a dynamic website for saving donor data</p>
-      
+        <div class="search-controls">
+            <select id="select-category" value=""></select>
+            <select id="select-organizer" value=""></select>
+            <select id="select-city" value=""></select>
+            <button onclick="searchDataList()">search</button>
+            <button onclick="resetDataList()">reset</button>
+        </div>
+        <table border="1" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>index</th>
+                    <th>Organizer</th>
+                    <th>Category</th>
+                    <th>Caption</th>
+                    <th>Target Funding</th>
+                    <th>Current Funding</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </main>
-
 </body>
+
+<script src="js/request.js"></script>
+<script>
+    const selectCategory = document.getElementById('select-category');
+    const selectOrganizer = document.getElementById('select-organizer');
+    const selectCity = document.getElementById('select-city');
+
+    // init data
+    searchCategory();
+    searchOrganizer();
+    searchCity();
+    searchDataList();
+
+    // search category data
+    function searchCategory() {
+        selectCategory.innerHTML = '<option selected value=""></option>'
+        GetRequest('category-list').then(res => {
+            for (let i = 0; i < res.length; i++) {
+                const optionEle = document.createElement('option');
+                optionEle.innerText = res[i].name;
+                optionEle.value =  res[i].category_id;
+                selectCategory.appendChild(optionEle);
+            }
+        }).catch(error => {
+            console.log(error)
+        });
+    }
+    // search organizer data
+    function searchOrganizer() {
+        selectOrganizer.innerHTML = '<option selected value=""></option>'
+        GetRequest('organizer-list').then(res => {
+            for (let i = 0; i < res.length; i++) {
+                const optionEle = document.createElement('option');
+                optionEle.innerText = res[i].organizer;
+                optionEle.value =  res[i].organizer;
+                selectOrganizer.appendChild(optionEle);
+            }
+        }).catch(error => {
+            console.log(error)
+        });
+    }
+    // search city data
+    function searchCity() {
+        selectCity.innerHTML = '<option selected value=""></option>'
+        GetRequest('city-list').then(res => {
+            for (let i = 0; i < res.length; i++) {
+                const optionEle = document.createElement('option');
+                optionEle.innerText = res[i].city;
+                optionEle.value =  res[i].city;
+                selectCity.appendChild(optionEle);
+            }
+        }).catch(error => {
+            console.log(error)
+        });
+    }
+    // search data list
+    function searchDataList() {
+        const params = {
+            organizer: selectOrganizer.value,
+            city: selectCity.value,
+            category_id: selectCategory.value
+        };
+        GetRequest('list', params).then(res => {
+            renderDom(res);
+        }).catch(error => {
+            console.log(error)
+        });
+    }
+
+    // render dom
+    function renderDom(res) {
+    const tableBody = document.getElementsByTagName('tbody')[0];
+    tableBody.innerHTML = '';
+    document.getElementById('no-data')?.remove();
+    if (!!res.length) {
+        document.getElementById('no-data')?.remove();
+    } else {
+        // 无数据
+        const divDom = document.createElement('div');
+        divDom.innerHTML = 'No Data';
+        divDom.id = 'no-data'
+        divDom.style.fontWeight = 'bold';
+        divDom.style.color = 'red';
+        document.getElementsByTagName('main')[0].appendChild(divDom);
+        return;
+    }
+    for (let i = 0; i < res.length; i++) {
+        const trDom = document.createElement('tr');
+        trDom.innerHTML = `
+            <td>${res[i].fundraiser_id}</td>
+            <td>${res[i].organizer}</td>
+            <td>${res[i].category_name}</td>
+            <td>${res[i].caption}</td>
+            <td>${res[i].target_funding}</td>
+            <td>${res[i].current_funding}</td>
+            <td>${res[i].city}</td>
+        `;
+        tableBody.appendChild(trDom);
+    }
+}
+
+    // reset all data
+    function resetDataList() {
+        selectOrganizer.value = '';
+        selectCity.value = '';
+        selectCategory.value = '';
+        searchDataList();
+    }
+</script>
 </html>
