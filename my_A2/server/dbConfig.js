@@ -1,4 +1,4 @@
-//本地服务器， MySQL默认端口3306
+//Configuration for accessing the db
 module.exports = {
     host: 'localhost',
     user: 'root',

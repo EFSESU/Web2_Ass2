@@ -7,6 +7,10 @@ const bodyParser = require('body-parser');
 // api list
 const serverApi = require('./api');
 
+/* 
+ * Create a web server that uses express,
+ * CORS and bodyParser
+ */
 const server = express();
 server.use(cors());
 server.use(bodyParser.json())
