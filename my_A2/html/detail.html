@@ -1,5 +1,7 @@
 <!doctype html>
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,6 +10,7 @@
     <title>CrowdFunding~(∠・ω< )⌒★</title>
     <link rel="stylesheet" href="./css/index.css">
 </head>
+<!--
 <body>
     <aside>
         <div class="sys-name">Menu</div>
@@ -30,7 +33,91 @@
     </div>
     
 </main>
-</body>
+-->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
+    .card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        padding: 20px;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .card-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .info-label {
+        font-weight: bold;
+        width: 120px;
+    }
+    .donate-button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    .donate-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+    <aside>
+        <div class="sys-name">Menu</div>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Home Page</a></li>
+                <li><a href="./fundraiser.html">Search Page</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+<div class="card">
+    <h1 class="card-title" id="caption"></h1>
+    <div class="info-item">
+        <span class="info-label">Organizer:</span>
+        <span id="organizer"></span>
+    </div>
+    <div class="info-item">
+        <span class="info-label">Category:</span>
+        <span id="category-name"></span>
+    </div>
+    <div class="info-item">
+        <span class="info-label">Target Funding:</span>
+        <span id="target-funding"></span>
+    </div>
+    <div class="info-item">
+        <span class="info-label">Current Funding:</span>
+        <span id="current-funding"></span>
+    </div>
+    <div class="info-item">
+        <span class="info-label">City:</span>
+        <span id="city"></span>
+    </div>
+    <button class="donate-button" onclick="showDialog()">Donate</button>
+</div>
+
 <script src="js/request.js"></script>
 <script>
     //调用GetRequest,获取活动详细信息
@@ -56,4 +143,5 @@
             alert("This feature is under construction");
         }
 </script>
+</body>
 </html>
