@@ -1,86 +1,102 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CrowdFunding~(∠・ω< )⌒★</title>
-    <link rel="stylesheet" href="./css/index.css">
-</head>
-<!--
-<body>
-    <aside>
-        <div class="sys-name">Menu</div>
-        <nav>
-            <ul>
-                <li><a href="./index.html">Home Page</a></li>
-                <li><a href="./fundraiser.html">Search Page</a></li>
-            </ul>
-        </nav>
-    </aside>
-<main>
-    <div>
-        <div> caption:  <span id="caption"></span></div>
-        <div> organizer:  <span id="organizer"></span></div>
-        <div> category name:  <span id="category-name"></span></div>
-        <div> target funding:  <span id="target-funding"></span></div>
-        <div> current funding:  <span id="current-funding"></span></div>
-        <div> city:  <span id="city"></span></div>
-        <button class="donate-button" onclick="showDialog()">Donate</button>
-    </div>
-    
-</main>
--->
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 20px;
-        background-color: #f4f4f4;
-    }
-    .card {
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        padding: 20px;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-    .card-title {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-    .info-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-    .info-label {
-        font-weight: bold;
-        width: 120px;
-    }
-    .donate-button {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-        margin-top: 20px;
-    }
-    .donate-button:hover {
-        background-color: #0056b3;
-    }
-</style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body, html {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            margin: 0; 
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        aside {
+            flex-shrink: 0;
+            width: 200px;
+            background-color: #eaeaea;
+            padding: 20px 40px;
+            box-sizing: border-box;
+        }
+        nav ul {
+            margin-top: 30px;
+        }
+        nav ul li {
+            margin-bottom: 20px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #007BFF; 
+        }
+        main {
+            flex-grow: 1; 
+            padding: 30px; 
+            box-sizing: border-box; 
+            margin-left: 20px; 
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 15px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 8px;
+            font-size: 14px;
+        }
+        .info-label {
+            font-weight: bold;
+        }
+        .donate-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        .donate-button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            aside {
+                width: 100%; 
+                padding: 10px; 
+            }
+            main {
+                padding: 15px;
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
 <body>
     <aside>
@@ -93,55 +109,43 @@
         </nav>
     </aside>
 
-<div class="card">
-    <h1 class="card-title" id="caption"></h1>
-    <div class="info-item">
-        <span class="info-label">Organizer:</span>
-        <span id="organizer"></span>
-    </div>
-    <div class="info-item">
-        <span class="info-label">Category:</span>
-        <span id="category-name"></span>
-    </div>
-    <div class="info-item">
-        <span class="info-label">Target Funding:</span>
-        <span id="target-funding"></span>
-    </div>
-    <div class="info-item">
-        <span class="info-label">Current Funding:</span>
-        <span id="current-funding"></span>
-    </div>
-    <div class="info-item">
-        <span class="info-label">City:</span>
-        <span id="city"></span>
-    </div>
-    <button class="donate-button" onclick="showDialog()">Donate</button>
-</div>
+    <main>
+        <div class="card">
+            <h1 class="card-title" id="caption"></h1>
+            <div class="info-grid">
+                <span class="info-label">Organizer:</span>
+                <span id="organizer"></span>
+                <span class="info-label">Category:</span>
+                <span id="category-name"></span>
+                <span class="info-label">Target Funding:</span>
+                <span id="target-funding"></span>
+                <span class="info-label">Current Funding:</span>
+                <span id="current-funding"></span>
+                <span class="info-label">City:</span>
+                <span id="city"></span>
+            </div>
+            <button class="donate-button" onclick="showDialog()">Donate</button>
+        </div>
+    </main>
 
-<script src="js/request.js"></script>
-<script>
-    //调用GetRequest,获取活动详细信息
-    GetRequest('detail', {
-        fundraiser_id: +location.href.split('=')[1]
-    }).then(res => {
-        // render data
-        const caption = document.getElementById('caption');
-        caption.innerText = res.caption;
-        const organizer = document.getElementById('organizer');
-        organizer.innerText = res.organizer;
-        const categoryName = document.getElementById('category-name');
-        categoryName.innerText = res.categoryName;
-        const targetFunding = document.getElementById('target-funding');
-        targetFunding.innerText = res.target_funding;
-        const currentFunding = document.getElementById('current-funding');
-        currentFunding.innerText = res.current_funding;
-        const city = document.getElementById('city');
-        city.innerText = res.city;
-    });
-    // botton
-    function showDialog() {
+    <script src="js/request.js"></script>
+    <script>
+        // 调用GetRequest,获取活动详细信息
+        GetRequest('detail', {
+            fundraiser_id: +location.href.split('=')[1]
+        }).then(res => {
+            // render data
+            document.getElementById('caption').innerText = res.caption;
+            document.getElementById('organizer').innerText = res.organizer;
+            document.getElementById('category-name').innerText = res.categoryName;
+            document.getElementById('target-funding').innerText = res.target_funding;
+            document.getElementById('current-funding').innerText = res.current_funding;
+            document.getElementById('city').innerText = res.city;
+        });
+
+        function showDialog() {
             alert("This feature is under construction");
         }
-</script>
+    </script>
 </body>
 </html>
