@@ -2,19 +2,130 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CrowdFunding~(∠・ω< )⌒★</title>
-    <link rel="stylesheet" href="./css/index.css">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        aside {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .sys-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
         .search-controls {
+            margin-bottom: 20px;
+            text-align: center;
             display: none;
         }
+
+        .search-controls select, .search-controls button {
+            margin: 5px;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+
+        .search-controls button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-controls button:hover {
+            background-color: #2980b9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e6f3ff;
+        }
+
+        #no-data {
+            text-align: center;
+            color: #e74c3c;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        
     </style>
 </head>
 <body>
-
     <aside>
         <div class="sys-name">Menu</div>
         <nav>
@@ -26,24 +137,21 @@
     </aside>
     
     <main>
-        <h1>Welcome to my web!!!</h1>
+        <h1>Welcome to CrowdFunding!!!</h1>
 
-        <!-- 添加图片 -->
-        <img src="./images/StarCitizen2023.png" alt="Description of Image" style="max-width: 70%; height: auto;">
+        <img src="./images/StarCitizen2023.png" alt="CrowdFunding Banner">
 
-
-        <p>This is a dynamic website for saving donor data</p>
         <div class="search-controls">
             <select id="select-category" value=""></select>
             <select id="select-organizer" value=""></select>
             <select id="select-city" value=""></select>
-            <button onclick="searchDataList()">search</button>
-            <button onclick="resetDataList()">reset</button>
+            <button onclick="searchDataList()">Search</button>
+            <button onclick="resetDataList()">Reset</button>
         </div>
-        <table border="1" cellpadding="5">
+        <table>
             <thead>
                 <tr>
-                    <th>index</th>
+                    <th>Index</th>
                     <th>Organizer</th>
                     <th>Category</th>
                     <th>Caption</th>
@@ -56,114 +164,115 @@
             </tbody>
         </table>
     </main>
-</body>
 
-<script src="js/request.js"></script>
-<script>
-    const selectCategory = document.getElementById('select-category');
-    const selectOrganizer = document.getElementById('select-organizer');
-    const selectCity = document.getElementById('select-city');
+    <script src="js/request.js"></script>
+    <script>
+        // Your existing JavaScript code here (unchanged)
+        const selectCategory = document.getElementById('select-category');
+        const selectOrganizer = document.getElementById('select-organizer');
+        const selectCity = document.getElementById('select-city');
 
-    // init data
-    searchCategory();
-    searchOrganizer();
-    searchCity();
-    searchDataList();
-
-    // search category data
-    function searchCategory() {
-        selectCategory.innerHTML = '<option selected value=""></option>'
-        GetRequest('category-list').then(res => {
-            for (let i = 0; i < res.length; i++) {
-                const optionEle = document.createElement('option');
-                optionEle.innerText = res[i].name;
-                optionEle.value =  res[i].category_id;
-                selectCategory.appendChild(optionEle);
-            }
-        }).catch(error => {
-            console.log(error)
-        });
-    }
-    // search organizer data
-    function searchOrganizer() {
-        selectOrganizer.innerHTML = '<option selected value=""></option>'
-        GetRequest('organizer-list').then(res => {
-            for (let i = 0; i < res.length; i++) {
-                const optionEle = document.createElement('option');
-                optionEle.innerText = res[i].organizer;
-                optionEle.value =  res[i].organizer;
-                selectOrganizer.appendChild(optionEle);
-            }
-        }).catch(error => {
-            console.log(error)
-        });
-    }
-    // search city data
-    function searchCity() {
-        selectCity.innerHTML = '<option selected value=""></option>'
-        GetRequest('city-list').then(res => {
-            for (let i = 0; i < res.length; i++) {
-                const optionEle = document.createElement('option');
-                optionEle.innerText = res[i].city;
-                optionEle.value =  res[i].city;
-                selectCity.appendChild(optionEle);
-            }
-        }).catch(error => {
-            console.log(error)
-        });
-    }
-    // search data list
-    function searchDataList() {
-        const params = {
-            organizer: selectOrganizer.value,
-            city: selectCity.value,
-            category_id: selectCategory.value
-        };
-        GetRequest('list', params).then(res => {
-            renderDom(res);
-        }).catch(error => {
-            console.log(error)
-        });
-    }
-
-    // render dom
-    function renderDom(res) {
-    const tableBody = document.getElementsByTagName('tbody')[0];
-    tableBody.innerHTML = '';
-    document.getElementById('no-data')?.remove();
-    if (!!res.length) {
-        document.getElementById('no-data')?.remove();
-    } else {
-        // 无数据
-        const divDom = document.createElement('div');
-        divDom.innerHTML = 'No Data';
-        divDom.id = 'no-data'
-        divDom.style.fontWeight = 'bold';
-        divDom.style.color = 'red';
-        document.getElementsByTagName('main')[0].appendChild(divDom);
-        return;
-    }
-    for (let i = 0; i < res.length; i++) {
-        const trDom = document.createElement('tr');
-        trDom.innerHTML = `
-            <td>${res[i].fundraiser_id}</td>
-            <td>${res[i].organizer}</td>
-            <td>${res[i].category_name}</td>
-            <td>${res[i].caption}</td>
-            <td>${res[i].target_funding}</td>
-            <td>${res[i].current_funding}</td>
-            <td>${res[i].city}</td>
-        `;
-        tableBody.appendChild(trDom);
-    }
-}
-
-    // reset all data
-    function resetDataList() {
-        selectOrganizer.value = '';
-        selectCity.value = '';
-        selectCategory.value = '';
+        // init data
+        searchCategory();
+        searchOrganizer();
+        searchCity();
         searchDataList();
-    }
-</script>
+
+        // search category data
+        function searchCategory() {
+            selectCategory.innerHTML = '<option selected value=""></option>'
+            GetRequest('category-list').then(res => {
+                for (let i = 0; i < res.length; i++) {
+                    const optionEle = document.createElement('option');
+                    optionEle.innerText = res[i].name;
+                    optionEle.value =  res[i].category_id;
+                    selectCategory.appendChild(optionEle);
+                }
+            }).catch(error => {
+                console.log(error)
+            });
+        }
+        // search organizer data
+        function searchOrganizer() {
+            selectOrganizer.innerHTML = '<option selected value=""></option>'
+            GetRequest('organizer-list').then(res => {
+                for (let i = 0; i < res.length; i++) {
+                    const optionEle = document.createElement('option');
+                    optionEle.innerText = res[i].organizer;
+                    optionEle.value =  res[i].organizer;
+                    selectOrganizer.appendChild(optionEle);
+                }
+            }).catch(error => {
+                console.log(error)
+            });
+        }
+        // search city data
+        function searchCity() {
+            selectCity.innerHTML = '<option selected value=""></option>'
+            GetRequest('city-list').then(res => {
+                for (let i = 0; i < res.length; i++) {
+                    const optionEle = document.createElement('option');
+                    optionEle.innerText = res[i].city;
+                    optionEle.value =  res[i].city;
+                    selectCity.appendChild(optionEle);
+                }
+            }).catch(error => {
+                console.log(error)
+            });
+        }
+        // search data list
+        function searchDataList() {
+            const params = {
+                organizer: selectOrganizer.value,
+                city: selectCity.value,
+                category_id: selectCategory.value
+            };
+            GetRequest('list', params).then(res => {
+                renderDom(res);
+            }).catch(error => {
+                console.log(error)
+            });
+        }
+
+        // render dom
+        function renderDom(res) {
+            const tableBody = document.getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = '';
+            document.getElementById('no-data')?.remove();
+            if (!!res.length) {
+                document.getElementById('no-data')?.remove();
+            } else {
+                // 无数据
+                const divDom = document.createElement('div');
+                divDom.innerHTML = 'No Data';
+                divDom.id = 'no-data'
+                divDom.style.fontWeight = 'bold';
+                divDom.style.color = 'red';
+                document.getElementsByTagName('main')[0].appendChild(divDom);
+                return;
+            }
+            for (let i = 0; i < res.length; i++) {
+                const trDom = document.createElement('tr');
+                trDom.innerHTML = `
+                    <td>${res[i].fundraiser_id}</td>
+                    <td>${res[i].organizer}</td>
+                    <td>${res[i].category_name}</td>
+                    <td>${res[i].caption}</td>
+                    <td>${res[i].target_funding}</td>
+                    <td>${res[i].current_funding}</td>
+                    <td>${res[i].city}</td>
+                `;
+                tableBody.appendChild(trDom);
+            }
+        }
+
+        // reset all data
+        function resetDataList() {
+            selectOrganizer.value = '';
+            selectCity.value = '';
+            selectCategory.value = '';
+            searchDataList();
+        }
+    </script>
+</body>
 </html>
