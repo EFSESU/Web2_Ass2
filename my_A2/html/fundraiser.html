@@ -301,8 +301,10 @@
             document.getElementsByTagName('main')[0].appendChild(divDom);
             return;
         }
+        // Iterate through the response array 'res'
         for (let i = 0; i < res.length; i++) {
             const trDom = document.createElement('tr');
+            // Set the inner HTML of the table row with data from 'res'
             trDom.innerHTML = `
                 <td>${res[i].fundraiser_id}</td>
                 <td><a href="./detail.html?id=${res[i].fundraiser_id}">${res[i].organizer}</a></td>

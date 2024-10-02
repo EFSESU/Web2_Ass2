@@ -1,11 +1,8 @@
-/*
-    nodejs 连接MySQL教程 https://www.runoob.com/nodejs/nodejs-mysql.html
-    query方法教程 https://www.runoob.com/nodejs/nodejs-express-framework.html
-*/
 const mysql = require('mysql')  
 const SQL = require('./sql')
 // database config
 const dbConfig = require('./dbConfig')
+// Import Express framework
 const express = require('express');
 // 创建路由对象 Create routing object
 const expressRouter = express.Router()
