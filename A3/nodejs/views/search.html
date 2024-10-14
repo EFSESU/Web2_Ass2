@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Fundraisers</title>
+  <link rel="stylesheet" href="/search.css">
+  <link rel="stylesheet" href="/mainstyle.css">
+  <style>
+    
+  </style>
+</head>
+<body>
+  <h1>Search Fundraisers</h1>
+  <form id="searchForm">
+    <label for="organizer">Organizer:</label>
+    <input type="text" id="organizer" name="organizer">
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city">
+    <label for="category">Category:</label>
+    <select id="category" name="category">
+      <option value="">Select Category</option>
+      <option value="1">Edication Fund</option>
+      <option value="2">Medical Fund</option>
+      
+    </select>
+
+    <div style="display: flex; gap: 10px;">
+      <button  type="submit">Search</button>
+      <button type="button" onclick="clearForm()">Clear</button>
+      
+    </div>
+    
+  </form>
+  <button type="button" id="backButton" onclick="HomeForm()">Home</button>
+  <div id="searchResults">
+
+  </div>
+  <div id="imageContainer">
+    <img style="margin-bottom: 45px;" src="picture1.jpg" id="search1">
+    <img style="margin-bottom: 45px;" src="picture2.jpg" id="search2">
+  </div>
+  <script src="/search.js"></script>
+</body>
+</html>

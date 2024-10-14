@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="/mainstyle.css">
+</head>
+<body>
+  <h1>Welcome to the admin Page </h1>
+  
+  <div style="display: flex; gap: 10px;">
+    <button type="button"  onclick="back()">Back</button>
+    <button type="button"  onclick="searchForm()">Search</button>
+    <button type="button" onclick="addForm()">Add</button>
+</div>
+  <table id="fundraiserTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Organizer</th>
+            <th>Caption</th>
+            <th>Target Funding</th>
+            <th>Current Funding</th>
+            <th>City</th>
+            <th>Active</th>
+            <th>Category</th>
+            <th>Actions</th> 
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+    </table>
+    <script src="/admin.js"></script>
+</body>
+</html>
